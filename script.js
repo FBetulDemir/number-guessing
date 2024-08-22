@@ -8,26 +8,26 @@ let secretNum = Math.floor(Math.random() * 20 + 1);
 let score = 20;
 let highestScore = 0;
 console.log(secretNum);
+document.querySelector(".score").textContent = score;
+document.querySelector(".highest_score").textContent = highestScore;
 
 checkBtn.addEventListener("click", function () {
   const guess = Number(document.querySelector(".input_value").value);
-  document.querySelector(".score").textContent = score;
-  document.querySelector(".highest_score").textContent = highestScore;
-
-  console.log("clicked");
 
   if (guess === secretNum) {
     message.textContent = "You have won!";
+    randomNumber.textContent = secretNum;
     if (highestScore < score) {
       highestScore = score;
+      document.querySelector(".highest_score").textContent = highestScore;
     }
   } else if (!guess) {
     message.textContent = "No number, please enter a number!";
   } else if (guess !== secretNum) {
-    message.textContent = "wrong number";
+    message.textContent = guess > secretNum ? "📈 Too high!" : "📉 Too low!";
     score--;
     document.querySelector(".score").textContent = score;
-    if (scoreDisplay < 1) {
+    if (score < 1) {
       message.textContent = "You have lost!";
     }
   }
@@ -36,7 +36,7 @@ checkBtn.addEventListener("click", function () {
 restartButton.addEventListener("click", function () {
   score = 20;
   secretNum = Math.floor(Math.random() * 20) + 1;
-
+  document.querySelector(".input_value").value = "";
   message.textContent = "Start guessing...";
   document.querySelector(".score").textContent = score;
   document.querySelector(".random_number").textContent = "?";
