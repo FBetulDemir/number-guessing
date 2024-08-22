@@ -17,6 +17,10 @@ checkBtn.addEventListener("click", function () {
   if (guess === secretNum) {
     message.textContent = "You have won!";
     randomNumber.textContent = secretNum;
+
+    document.querySelector("body").style.backgroundColor = "#60b347";
+    document.querySelector(".input_value").disabled = true;
+
     if (highestScore < score) {
       highestScore = score;
       document.querySelector(".highest_score").textContent = highestScore;
@@ -34,6 +38,8 @@ checkBtn.addEventListener("click", function () {
 });
 
 restartButton.addEventListener("click", function () {
+  document.querySelector("body").style.backgroundColor = "#222";
+  document.querySelector(".input_value").disabled = false;
   score = 20;
   secretNum = Math.floor(Math.random() * 20) + 1;
   document.querySelector(".input_value").value = "";
@@ -41,7 +47,4 @@ restartButton.addEventListener("click", function () {
   document.querySelector(".score").textContent = score;
   document.querySelector(".random_number").textContent = "?";
   document.querySelector(".guess").value = "";
-
-  document.querySelector("body").style.backgroundColor = "#222";
-  document.querySelector(".random_number").style.width = "15rem";
 });
